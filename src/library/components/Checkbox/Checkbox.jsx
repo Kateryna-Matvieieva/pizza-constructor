@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FormControlLabel,
@@ -17,11 +17,13 @@ export default function Checkbox({
   setDefaultExpanded,
 }) {
   const { t } = useTranslation();
-  const dataFromOrder = orderGroupArray.find(({ name }) => name === value.name);
+  const dataFromOrder = useMemo(() => orderGroupArray.find(({ name }) => name === value.name), [orderGroupArray, value.name]);
   const [checked, setChecked] = useState(!!dataFromOrder);
-  value.portion = dataFromOrder?.portion || 1;
+  value.portion = useMemo(() => dataFromOrder?.portion || 1, [dataFromOrder?.portion]);
   const [inputNumber, setInputNumber] = useState(value.portion);
-  const max = inputNumericMax + inputNumber;
+  const max = useMemo(() => inputNumericMax + inputNumber, [inputNumericMax, inputNumber]);
+  console.log(value.name, {inputNumericMax,inputNumber}, max)
+  const disabled = useMemo(() => !checked && max === inputNumber, [checked, max, inputNumber]);
 
   if (checked) setDefaultExpanded(true);
 
@@ -37,7 +39,7 @@ export default function Checkbox({
             }}
             name={label}
             color="primary"
-            disabled={!checked && max === inputNumber}
+            disabled={disabled}
             checked={checked}
           />
         }

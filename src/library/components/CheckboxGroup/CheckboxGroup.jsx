@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { FormControl, FormLabel } from "@material-ui/core";
 import Collapsible from "react-collapsible";
@@ -16,7 +16,7 @@ export default function CheckboxGroup({
 }) {
   const { t } = useTranslation();
   const [defaultExpanded, setDefaultExpanded] = useState(false);
-  const [, dispatch] = useContext(OrderContext);
+  const [,dispatch] = useContext(OrderContext);
 
   const handleCheckboxChange = (e, payload) => {
     e.stopPropagation();
@@ -27,13 +27,12 @@ export default function CheckboxGroup({
     }
     dispatch({ type: ORDER_ACTIONS.DELETE_PIZZA_INGRIDIENT, payload });
   };
-
   const handleNumericChange = (portion, payload) => {
     payload = { portion, item: { [category]: payload } };
     dispatch({ type: ORDER_ACTIONS.UPDATE_PIZZA_INGRIDIENT, payload });
   };
 
-  const FormControlLabelGroup = ingridientsArray.map(({ value, label }) => {
+  const FormControlLabelGroup = useMemo(() => ingridientsArray.map(({ value, label }) => {
     return (
       <Checkbox
         checkboxCb={handleCheckboxChange}
@@ -45,7 +44,7 @@ export default function CheckboxGroup({
         setDefaultExpanded={setDefaultExpanded}
       />
     );
-  });
+  }), [ingridientsArray]);
 
   return (
     <CollapsibleWrapper>

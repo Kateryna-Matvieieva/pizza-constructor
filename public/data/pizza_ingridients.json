@@ -1,265 +1,246 @@
 {
-  "base": [
-    {
-      "name": "thinDough",
-      "price": {
-        "small": 10,
-        "medium": 20,
-        "large": 30
+  "sauces": {
+    "sweetSauces": [
+      {
+        "price": "5",
+        "name": "sweetChili",
+        "weight": "10"
       },
-      "size": {
-        "small": 25,
-        "medium": 30,
-        "large": 35
-      },
-      "weight": {
-        "small": 70,
-        "medium": 85,
-        "large": 100
+      {
+        "price": "5",
+        "name": "orangeSauce",
+        "weight": "10"
       }
-    },
-    {
-      "name": "regularDough",
-      "price": {
-        "small": 10,
-        "medium": 20,
-        "large": 30
+    ],
+    "regularSauces": [
+      {
+        "price": "5",
+        "name": "tartarus",
+        "weight": "10"
       },
-      "size": {
-        "small": 25,
-        "medium": 30,
-        "large": 35
+      {
+        "price": "5",
+        "name": "pesto",
+        "weight": "10"
       },
-      "weight": {
-        "small": 70,
-        "medium": 85,
-        "large": 100
+      {
+        "price": "5",
+        "name": "ketchup",
+        "weight": "10"
+      },
+      {
+        "price": "5",
+        "name": "BBQ",
+        "weight": "10"
+      },
+      {
+        "price": "5",
+        "name": "garlicSouce",
+        "weight": "10"
       }
-    }
-  ],
+    ]
+  },
   "fillings": {
-    "vegetables": [
-      {
-        "name": "olives",
-        "price": 7,
-        "weight": 25
-      },
-      {
-        "name": "mushrooms",
-        "price": 7,
-        "weight": 25
-      },
-      {
-        "name": "tomato",
-        "price": 7,
-        "weight": 25
-      },
-      {
-        "name": "pepper",
-        "price": 7,
-        "weight": 25
-      },
-      {
-        "name": "onion",
-        "price": 7,
-        "weight": 25
-      }
-    ],
-    "meat": [
-      {
-        "name": "hen",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "beef",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "salami",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "huntingSausages",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "bacon",
-        "price": 10,
-        "weight": 25
-      }
-    ],
     "seafoods": [
       {
-        "name": "anchovies",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "mussels",
-        "price": 10,
-        "weight": 25
-      },
-      {
+        "price": "10",
         "name": "shrimp",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
       },
       {
+        "price": "10",
         "name": "squid",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
       },
       {
+        "price": "10",
         "name": "salmon",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "mussels",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "anchovies",
+        "weight": "25"
       }
     ],
     "cheeses": [
       {
-        "name": "mozzarella",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "brie",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "parmesan",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "cheder",
-        "price": 10,
-        "weight": 25
-      },
-      {
+        "price": "10",
         "name": "mazdam",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "mozzarella",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "brie",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "cheder",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "parmesan",
+        "weight": "25"
       }
     ],
     "fruits": [
       {
+        "price": "10",
         "name": "pear",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
       },
       {
-        "name": "orange",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "pumpkin",
-        "price": 10,
-        "weight": 25
-      },
-      {
-        "name": "cannedPeach",
-        "price": 10,
-        "weight": 25
-      },
-      {
+        "price": "10",
         "name": "cannedPineapple",
-        "price": 10,
-        "weight": 25
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "pumpkin",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "cannedPeach",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "orange",
+        "weight": "25"
+      }
+    ],
+    "meat": [
+      {
+        "price": "10",
+        "name": "beef",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "huntingSausages",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "bacon",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "salami",
+        "weight": "25"
+      },
+      {
+        "price": "10",
+        "name": "hen",
+        "weight": "25"
+      }
+    ],
+    "vegetables": [
+      {
+        "price": "7",
+        "name": "tomato",
+        "weight": "25"
+      },
+      {
+        "price": "7",
+        "name": "mushrooms",
+        "weight": "25"
+      },
+      {
+        "price": "7",
+        "name": "olives",
+        "weight": "25"
+      },
+      {
+        "price": "7",
+        "name": "onion",
+        "weight": "25"
+      },
+      {
+        "price": "7",
+        "name": "pepper",
+        "weight": "25"
       }
     ],
     "herbs": [
       {
+        "price": "5",
         "name": "spinach",
-        "price": 5,
-        "weight": 10
+        "weight": "10"
       },
       {
-        "name": "arugula",
-        "price": 5,
-        "weight": 10
-      },
-      {
+        "price": "10",
         "name": "basil",
-        "price": 5,
-        "weight": 10
+        "weight": "25"
       },
       {
+        "price": "10",
+        "name": "arugula",
+        "weight": "25"
+      },
+      {
+        "price": "10",
         "name": "cilantro",
-        "price": 5,
-        "weight": 10
-      }
-    ]
-  },
-  "sauces": {
-    "regularSauces": [
-      {
-        "name": "ketchup",
-        "price": 5,
-        "weight": 20
-      },
-      {
-        "name": "BBQ",
-        "price": 10,
-        "weight": 20
-      },
-      {
-        "name": "pesto",
-        "price": 5
-      },
-      {
-        "name": "garlicSouce",
-        "price": 5,
-        "weight": 20
-      },
-      {
-        "name": "tartarus",
-        "price": 5,
-        "weight": 20
-      }
-    ],
-    "sweetSauces": [
-      {
-        "name": "orangeSauce",
-        "price": 5,
-        "weight": 20
-      },
-      {
-        "name": "sweetChili",
-        "price": 5,
-        "weight": 20
-      }
-    ],
-    "hotSauces": [
-      {
-        "name": "hotChili",
-        "price": 5,
-        "weight": 20
-      },
-      {
-        "name": "mustard",
-        "price": 5,
-        "weight": 20
+        "weight": "25"
       }
     ]
   },
   "additional": {
     "boards": [
       {
+        "price": "5",
         "name": "philadelphiaBoard",
-        "price": 5,
-        "weight": 10
+        "weight": "10"
       },
       {
+        "price": "5",
         "name": "sausageBoard",
-        "price": 5,
-        "weight": 10
+        "weight": "10"
       }
     ]
-  }
+  },
+  "base": [
+    {
+      "size": {
+        "small": "25",
+        "large": "35",
+        "medium": "30"
+      },
+      "ingridientsAmount": "15, 20",
+      "price": {
+        "small": "10",
+        "large": "30",
+        "medium": "20"
+      },
+      "name": "thinDough",
+      "weight": {
+        "small": "70",
+        "large": "20",
+        "medium": "85"
+      }
+    },
+    {
+      "price": "10",
+      "name": "regularDough",
+      "weight": {
+        "small": "79",
+        "large": "100",
+        "medium": "85"
+      }
+    }
+  ]
 }

@@ -2,26 +2,30 @@ import {
   addIngridient,
   deleteIngridient,
   updateIngridient,
+  reduceFillings,
   calculateTotals,
-} from "./helpers";
+} from './helpers';
 
-export const orderInitialState = JSON.parse(localStorage.getItem("order")) || {
-  size: "medium",
-  user: {},
+const initialState = {
+  size: '',
   additional: [],
   fillings: [],
   sauces: [],
+  additional: [],
+  user: {},
 };
 
-export const ORDER_ACTIONS = {
-  UPDATE_PIZZA_SIZE: "UPDATE_PIZZA_SIZE",
-  UPDATE_PIZZA_BASE: "UPDATE_PIZZA_BASE",
-  ADD_PIZZA_INGRIDIENT: "ADD_PIZZA_INGRIDIENT",
-  DELETE_PIZZA_INGRIDIENT: "DELETE_PIZZA_INGRIDIENT",
-  UPDATE_PIZZA_INGRIDIENT: "UPDATE_PIZZA_INGRIDIENT",
-  UPDATE_CHECKOUT: "UPDATE_CHECKOUT",
+export const orderInitialState = JSON.parse(localStorage.getItem('order')) || initialState;
 
-  CLEAR_PIZZA_INGRIDIENTS: "CLEAR_PIZZA_INGRIDIENTS",
+export const ORDER_ACTIONS = {
+  UPDATE_PIZZA_SIZE: 'UPDATE_PIZZA_SIZE',
+  UPDATE_PIZZA_BASE: 'UPDATE_PIZZA_BASE',
+  ADD_PIZZA_INGRIDIENT: 'ADD_PIZZA_INGRIDIENT',
+  DELETE_PIZZA_INGRIDIENT: 'DELETE_PIZZA_INGRIDIENT',
+  UPDATE_PIZZA_INGRIDIENT: 'UPDATE_PIZZA_INGRIDIENT',
+  UPDATE_CHECKOUT: 'UPDATE_CHECKOUT',
+  REDUCE_FILLINGS: 'REDUCE_FILLINGS',
+  CLEAR_INGRIDIENTS: '',
 };
 
 const orderReducer = (prevState, action) => {
@@ -35,6 +39,7 @@ const orderReducer = (prevState, action) => {
           size: action.payload,
         };
       case ORDER_ACTIONS.UPDATE_PIZZA_BASE:
+
         return {
           ...prevState,
           base: [action.payload],
@@ -66,17 +71,34 @@ const orderReducer = (prevState, action) => {
           ...newState,
           ...totals,
         };
+      case ORDER_ACTIONS.REDUCE_FILLINGS:
+        newState = reduceFillings(prevState.fillings);
+        totals = calculateTotals({ ...prevState, ...newState });
+
+        return {
+          ...prevState,
+          ...newState,
+          ...totals,
+        };
       case ORDER_ACTIONS.UPDATE_CHECKOUT:
         return {
           ...prevState,
           user: action.payload,
         };
+      case ORDER_ACTIONS.CLEAR_INGRIDIENTS:
+        return {
+          ...prevState,
+          additional: [],
+          fillings: [],
+          sauces: [],
+          
+        }
       default:
         return prevState;
     }
   })();
 
-  localStorage.setItem("order", JSON.stringify(newState));
+  localStorage.setItem('order', JSON.stringify(newState));
 
   return newState;
 };

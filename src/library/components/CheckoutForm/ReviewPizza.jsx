@@ -34,7 +34,7 @@ export default function ReviewPizza() {
   const classes = useReviewStyles();
   const { t } = useTranslation();
 
-  const cb = ({ name, price, weight, portion }) => (
+  const cb = ({ name, price, weight, portion=1 }) => (
     <ListItem className={classes.listItem} key={name}>
       <ListItemText
         primary={t(name)}
@@ -49,6 +49,7 @@ export default function ReviewPizza() {
   const fillings = order.fillings.map(cb);
   const sauces = order.sauces.map(cb);
   const additional = order.additional.map(cb);
+  const base = order.base.map(cb);
 
   return (
     <>
@@ -56,7 +57,8 @@ export default function ReviewPizza() {
         <Trans>pizzaIngridients</Trans>
       </Typography>
       <List disablePadding>
-        {/* base and size !!!!!!!!!!!!!! */}
+        <CatigoryTitle classes={classes} title={"orderedBase"} />
+        {base}
         <CatigoryTitle classes={classes} title={"orderedFillings"} />
         {fillings}
         <CatigoryTitle classes={classes} title={"orderedSauces"} />

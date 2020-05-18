@@ -1,17 +1,19 @@
-import React from "react";
-import { Trans, useTranslation } from "react-i18next";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import DetailsForm from "./DetailsForm";
-import ReviewPizza from "./ReviewPizza";
-import { useCheckoutStyles } from "./styles";
+import React, { useState, useContext } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Paper from '@material-ui/core/Paper';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import DetailsForm from './DetailsForm';
+import ReviewPizza from './ReviewPizza';
+import OrderContext from '../../../engine/OrderContext';
+import { formatOrder } from './helpers';
+import { useCheckoutStyles } from './styles';
 
-const steps = ["reviewYourOrder", "details"];
+const steps = ['reviewYourOrder', 'details'];
 
 function getStepContent(step) {
   switch (step) {
@@ -20,16 +22,16 @@ function getStepContent(step) {
     case 1:
       return <DetailsForm />;
     default:
-      throw new Error("Unknown step");
+      throw new Error('Unknown step');
   }
 }
 
 const OrderSubmited = ({ orderNumber }) => (
   <>
-    <Typography variant="h5" gutterBottom>
+    <Typography variant='h5' gutterBottom>
       <Trans>thankYouForOrder</Trans>
     </Typography>
-    <Typography variant="subtitle1">
+    <Typography variant='subtitle1'>
       <Trans>yourOrderNumber</Trans>
       {orderNumber}
       <br />
@@ -38,11 +40,13 @@ const OrderSubmited = ({ orderNumber }) => (
   </>
 );
 
+
 export default function Checkout() {
+  const [order] = useContext(OrderContext);
   const { t } = useTranslation();
   const classes = useCheckoutStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const orderNumber = 1353656;
+  const [activeStep, setActiveStep] = useState(0);
+  const [orderNumber, setOrderNumber] = useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -52,12 +56,36 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
+  const handlePlaceOrder = async () => {
+    const orderData = formatOrder(order);
+
+    try {
+      const response = await fetch(process.env.REACT_APP_API_POST_ORDER, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData),
+      });
+      const data = await response.json();
+      console.log({data})
+
+      if(!data?.orderNumber) throw new Error('Place order fails');
+    
+      setOrderNumber(data.orderNumber);
+      setActiveStep(activeStep + 1);
+      localStorage.clear();      
+    } catch(e) {
+      throw new Error('Error during placing order');
+    }
+  }
+
   return (
     <>
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component='h1' variant='h4' align='center'>
             <Trans>сheckout</Trans>
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -81,20 +109,27 @@ export default function Checkout() {
                       <Trans>back</Trans>
                     </Button>
                   ) : (
-                    <Button href="/constructor" className={classes.button}>
+                    <Button href='/constructor' className={classes.button}>
                       <Trans>backToConstr</Trans>
                     </Button>
                   )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1
-                      ? t("placeOrder")
-                      : t("next")}
-                  </Button>
+                  {activeStep === steps.length - 1
+                      ? (<Button
+                        variant='contained'
+                        color='primary'
+                        onClick={handlePlaceOrder}
+                        className={classes.button}
+                      >
+                        <Trans>placeOrder</Trans>
+                      </Button>)
+                      : (<Button
+                        variant='contained'
+                        color='primary'
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        <Trans>next</Trans>
+                      </Button>)}
                 </div>
               </>
             )}

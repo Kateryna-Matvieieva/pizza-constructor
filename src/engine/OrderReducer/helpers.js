@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 export const addIngridient = (prevState, newState) => {
-  console.log("newState", newState);
   const key = Object.keys(newState)[0];
   const payload = newState[key];
 
@@ -61,3 +60,9 @@ export const calculateTotals = (newState) => {
 
   return { totalCoast, totalWeight };
 };
+export const reduceFillings = (fillings) => {
+  fillings = fillings.sort((a, b) => b.portion - a.portion);
+  fillings[0].portion = fillings[0].portion - 1;
+
+  return  { fillings };
+}
