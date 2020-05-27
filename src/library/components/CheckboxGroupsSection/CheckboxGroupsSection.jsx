@@ -8,7 +8,7 @@ import CheckboxGroup from '../CheckboxGroup';
 import InfoBlock from '../../../library/components/InfoBlock';
 import { SectionWrapper, GreyText } from './styles';
 
-export default function CheckboxGroupsSection({ group, inputNumericMax, type }) {
+export default function CheckboxGroupsSection({ group, inputNumericMax, inputNumericMin, type }) {
   const [generalConstructor] = useContext(ConstructorContext);
   const [order] = useContext(OrderContext);
   const { t } = useTranslation();
@@ -39,8 +39,9 @@ export default function CheckboxGroupsSection({ group, inputNumericMax, type }) 
       />
     );
   });
+  console.log(inputNumericMin, inputNumericMax, amount)
 
-  const chipColor = (inputNumericMax - amount === 0 || group === 'additional') ? 'primary' : 'secondary';
+  const chipColor = ((inputNumericMin || inputNumericMax) - amount <= 0 || group === 'additional') ? 'primary' : 'secondary';
   return (
     <>
       <InfoBlock>

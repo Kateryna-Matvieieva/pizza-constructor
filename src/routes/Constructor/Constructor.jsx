@@ -39,9 +39,9 @@ export default function Constructor(props) {
   });
 
   const allFillingsChose =
-    getTotalAmount(order.fillings) === ingridientsAmount.fillings[order.size];
+    getTotalAmount(order.fillings) >= ingridientsAmount.minFillings[order.size];
   const allSaucesChose =
-    getTotalAmount(order.sauces) === ingridientsAmount.sauces;
+    getTotalAmount(order.sauces) >= ingridientsAmount.minSauces;
 
   const disableSubmit = !(allFillingsChose && allSaucesChose);
 
@@ -69,11 +69,13 @@ export default function Constructor(props) {
       <CheckboxGroupsSection
         group='fillings'
         inputNumericMax={ingridientsAmount.fillings[order.size]}
+        inputNumericMin={ingridientsAmount.minFillings[order.size]}
         type = {ORDER_ACTIONS.REDUCE_FILLINGS}
       />
       <CheckboxGroupsSection
         group='sauces'
         inputNumericMax={ingridientsAmount.sauces}
+        inputNumericMin={ingridientsAmount.minSauces}
       />
       <CheckboxGroupsSection
         group='additional'
